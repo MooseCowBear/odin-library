@@ -48,11 +48,31 @@ addBookButton.addEventListener("click", () => {
   newBookForm.display = "block"; //could be flex. need to build this.
 });
 
-//need event listener for form submit button 
+//adding a new book. currently letting html take care of validation
+const submitBtn = document.getElementById("submit");
+submitBtn.addEventListener("click", (event) => { 
+  event.preventDefault();
+  const newBookTitle = document.getElementById("title");
+  const newBookAuthor = document.getElementById("author");
+  const newBookRead = document.getElementById("read");
+
+  const newBook = new Book(newBookTitle.value, newBookAuthor.value, newBookRead.checked);
+
+  addBookToDom(newBook, library.length, booksDiv);
+
+  //reset the form
+  newBookTitle.value = "";
+  newBookAuthor.value = "";
+  newBookRead.checked = false;
+});
+
+//need event listeners for remove button, mark read/unread button
+
 
 function addBookToDom(book, index, attachTo) {
   const newBookDiv = document.createElement("div");
   newBookDiv.dataset.id = index; 
+  newBookDiv.classList.add("book_card");
 
   const bookInfoDiv = document.createElement("div");
   bookInfoDiv.classList.add("book_info"); //bc will want to style
@@ -68,12 +88,19 @@ function addBookToDom(book, index, attachTo) {
 
   newBookDiv.appendChild(bookInfoDiv);
 
+  const buttonDiv = document.createElement("div");
+
   const readBtn = document.createElement("button");
   readBtn.innerText = book.read ? "mark unread" : "mark read";
   readBtn.classList.add(book.read ? "read" : "not_read");
 
   const removeBtn = document.createElement("button");
-  removeBtn.innerText = "Remove";
+  removeBtn.innerText = "Remove from library";
+
+  buttonDiv.appendChild(readBtn);
+  buttonDiv.appendChild(removeBtn);
+
+  newBookDiv.appendChild(buttonDiv);
 
   attachTo.appendChild(newBookDiv); //add to the books div
 }
