@@ -48,7 +48,7 @@ addBookButton.addEventListener("click", () => {
   newBookForm.display = "block"; //could be flex. need to build this.
 });
 
-//adding a new book. currently letting html take care of validation
+//adding a new book. need to add validation!
 const submitBtn = document.getElementById("submit");
 submitBtn.addEventListener("click", (event) => { 
   event.preventDefault();
@@ -59,6 +59,7 @@ submitBtn.addEventListener("click", (event) => {
   const newBook = new Book(newBookTitle.value, newBookAuthor.value, newBookRead.checked);
 
   addBookToDom(newBook, library.length, booksDiv);
+  library.push(newBook);
 
   //reset the form
   newBookTitle.value = "";
@@ -67,7 +68,12 @@ submitBtn.addEventListener("click", (event) => {
 });
 
 //need event listeners for remove button, mark read/unread button
-
+booksDiv.addEventListener("click", (event) => {
+  if (event.target.tagName.toLowerCase() === "button") {
+    updateBook(event.target, library);
+    removeBook(event.target, library);
+  }
+});
 
 function addBookToDom(book, index, attachTo) {
   const newBookDiv = document.createElement("div");
@@ -92,7 +98,6 @@ function addBookToDom(book, index, attachTo) {
 
   const readBtn = document.createElement("button");
   readBtn.innerText = book.read ? "mark unread" : "mark read";
-  readBtn.classList.add(book.read ? "read" : "not_read");
 
   const removeBtn = document.createElement("button");
   removeBtn.innerText = "Remove from library";
@@ -105,6 +110,30 @@ function addBookToDom(book, index, attachTo) {
   attachTo.appendChild(newBookDiv); //add to the books div
 }
 
-function removeBookFromLibrary(libary, index) {
+function removeBook(target, library) {
+  if (target.innerText.toLowerCase().includes("remove") ) {
+    const [booKCard, index] = getBookCardAndIndex(target);
+
+    booKCard.remove();
+    removeBookFromLibrary(library, index);
+  }
+}
+
+function updateBook(target, library) {
+  if (target.innerText.toLowerCase().includes("mark")) {
+    const [ , index] = getBookCardAndIndex(target);
+    library[index].updateRead();
+
+    //then change in the inner text of the button
+    target.innerText = library[index].read ? "mark unread" : "mark read";
+  }
+}
+
+function getBookCardAndIndex(target) {
+  const booKCard = target.closest(".book_card");
+  return [booKCard, booKCard.dataset.id];
+}
+
+function removeBookFromLibrary(library, index) {
   library.splice(index, 1);
 }
