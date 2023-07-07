@@ -32,9 +32,6 @@ console.log("library: ", library);
 
 const booksDiv = document.getElementById("books");
 
-//want to iterate over library array, creating a book div that contains 
-//book info displayed somehow and buttons to update read property and a remove button for book
-
 for(let i = 0; i < library.length; i++) {
   const book = library[i];
   addBookToDom(book, i, booksDiv);
@@ -44,8 +41,14 @@ for(let i = 0; i < library.length; i++) {
 
 const addBookButton = document.getElementById("add");
 addBookButton.addEventListener("click", () => {
-  const newBookForm = document.getElementById("form");
-  newBookForm.display = "block"; //could be flex. need to build this.
+  const newBookForm = document.querySelector("form");
+  newBookForm.classList.add("show"); 
+});
+
+const cancelButton = document.getElementById("cancel");
+cancelButton.addEventListener("click", () => {
+  const newBookForm = document.querySelector("form");
+  newBookForm.classList.remove("show"); 
 });
 
 //adding a new book. need to add validation!
@@ -65,6 +68,9 @@ submitBtn.addEventListener("click", (event) => {
   newBookTitle.value = "";
   newBookAuthor.value = "";
   newBookRead.checked = false;
+
+  //need to set display back to none
+  newBookForm.classList.remove("show");
 });
 
 //need event listeners for remove button, mark read/unread button
@@ -95,6 +101,7 @@ function addBookToDom(book, index, attachTo) {
   newBookDiv.appendChild(bookInfoDiv);
 
   const buttonDiv = document.createElement("div");
+  buttonDiv.classList.add("button_wrapper");
 
   const readBtn = document.createElement("button");
   readBtn.innerText = book.read ? "mark unread" : "mark read";

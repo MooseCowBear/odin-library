@@ -55,14 +55,155 @@ a:not([class]) {
 }
 /* end reset */
 
+:root {
+  color-scheme: light dark;
+  --neutral-100: rgb(240, 240, 240);
+  --neutral-200: rgba(158, 158, 158, 0.8);
+  --neutral-300: rgb(86, 86, 86);
+  --neutral-400: rgb(20, 20, 20);
+  --accent: rgb(251, 169, 44);
+  --radius: 5px;
+}
+
 body {
-  font-family: sans-serif;
+  font-family: 'DM Sans', sans-serif;
+  display: flex;
+  flex-direction: column;
+  padding: 1vw 5vw;
+  gap: 1rem;
+  background-color: var(--neutral-100);
+  color: var(--neutral-400);
+}
+
+form {
+  display: none;
+}
+
+.show {
+  display: flex;
+  flex-direction: column;
+}
+
+h1, 
+h2,
+h3 {
+  font-family: 'DM Serif Display', serif;
+}
+
+h1 {
+  font-size: 5rem;
+  line-height: 1;
+}
+
+h2 {
+  text-transform: lowercase;
+}
+
+.books_title {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.books_wrapper {
+  display: grid;
+  grid-template-columns: repeat( auto-fit, minmax(300px, 1fr) );
+  gap: 1rem;
 }
 
 .book_card {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   gap: 0.5rem;
   padding: 1rem;
-  border: 2px solid black;
+  border-radius: var(--radius);
+  border: 2px solid var(--neutral-200);
+}
+
+h3 {
+  border-bottom: 2px solid var(--accent);
+}
+
+.button_wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+button,
+input[type="submit"] {
+  border-radius: var(--radius);
+  border: 2px solid var(--neutral-300);
+  background-color: transparent;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  color: inherit;
+}
+
+button:hover, 
+button:focus,
+input[type="submit"]:hover,
+input[type="submit"]:focus {
+  background-color: var(--neutral-300);
+  color: var(--neutral-100);
+}
+
+.form_content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  margin: 1rem;
+  width: clamp(300px, 60vw, 600px);
+  align-self: center;
+}
+
+input[type="text"] {
+  width: 100%;
+  border-radius: var(--radius);
+  border: 2px solid var(--neutral-200);
+  outline: none;
+  background-color: transparent;
+  padding: 0.3rem 0.5rem;
+  font: inherit;
+}
+
+input[type="checkbox"] {
+  accent-color: var(--neutral-300);
+}
+
+.cancel {
+  align-self: flex-start;
+}
+
+@media only screen and (max-width: 700px) {
+  body {
+    gap: 0.3rem;
+  }
+  .button_wrapper {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .books_title {
+    margin-bottom: 0.5rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.2rem;
+  }
+
+  h1 {
+    font-size: 3rem;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --neutral-400: rgba(240, 240, 240, 0.7);
+    --neutral-300: rgba(188, 188, 188, 0.9);
+    --neutral-200: rgb(86, 86, 86);
+    --neutral-100: rgb(20, 20, 20);
+  }
 }

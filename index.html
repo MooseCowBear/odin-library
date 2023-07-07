@@ -5,35 +5,40 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Library Project</title>
   <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
   <script src="script.js" defer></script>
 </head>
 <body>
   <header>
-    <h2>Library</h2>
-    <div>
-      <button id="add">Add a book</button>
-    </div>
+    <h2>The Library</h2>
   </header>
   <main>
-    <h1>Books</h1>
+    <div class="books_title">
+      <h1>Collection.</h1>
+      <button id="add">Add a book</button>
+    </div>
     <form action="#">
       <h3>New book</h3>
-      <div>
-        <label for="title">title:*</label>
-        <input type="text" id="title" required>
+      <div class="form_content">
+        <div>
+          <label for="title">title:*</label>
+          <input type="text" id="title" required>
+        </div>
+        <div>
+          <label for="author">author:*</label>
+          <input type="text" id="author" required>
+        </div>
+        <div>
+          <input type="checkbox" id="read">
+          <label for="read">I've read this book</label>
+        </div>
+        <input type="submit" id="submit" value="Add to library">
+        <button id="cancel" class="cancel">Cancel</button>
       </div>
-      <div>
-        <label for="author">author:*</label>
-        <input type="text" id="author" required>
-      </div>
-      <div>
-        <input type="checkbox" id="read">
-        <label for="read">I've read this book</label>
-      </div>
-      <input type="submit" id="submit" value="Add to library">
     </form>
-    <div id="books">
-
+    <div class="books_wrapper" id="books">
     </div>
   </main>
 </body>
