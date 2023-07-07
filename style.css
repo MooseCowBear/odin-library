@@ -79,6 +79,20 @@ form {
   display: none;
 }
 
+.label_wrapper {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.error {
+  display: none;
+  color: salmon;
+}
+
+.error.show {
+  display: block;
+}
+
 .show {
   display: flex;
   flex-direction: column;

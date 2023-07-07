@@ -49,6 +49,11 @@ const cancelButton = document.getElementById("cancel");
 cancelButton.addEventListener("click", () => {
   const newBookForm = document.querySelector("form");
   newBookForm.classList.remove("show"); 
+
+  const titleErr = document.getElementById("title_error");
+  const authorErr = document.getElementById("author_error");
+  titleErr.classList.remove("show");
+  authorErr.classList.remove("show");
 });
 
 //adding a new book. need to add validation!
@@ -59,6 +64,19 @@ submitBtn.addEventListener("click", (event) => {
   const newBookAuthor = document.getElementById("author");
   const newBookRead = document.getElementById("read");
 
+  const titleErr = document.getElementById("title_error");
+  const authorErr = document.getElementById("author_error");
+
+  if (newBookTitle.value.trim() === "" || newBookAuthor.value.trim() === "") {
+    if (newBookTitle.value.trim() === "") {
+      titleErr.classList.add("show");
+    }
+    if (newBookAuthor.value.trim() === "") {
+      authorErr.classList.add("show");
+    }
+    return;
+  }
+
   const newBook = new Book(newBookTitle.value, newBookAuthor.value, newBookRead.checked);
 
   addBookToDom(newBook, library.length, booksDiv);
@@ -68,8 +86,11 @@ submitBtn.addEventListener("click", (event) => {
   newBookTitle.value = "";
   newBookAuthor.value = "";
   newBookRead.checked = false;
+  titleErr.classList.remove("show");
+  authorErr.classList.remove("show");
 
   //need to set display back to none
+  const newBookForm = document.querySelector("form");
   newBookForm.classList.remove("show");
 });
 

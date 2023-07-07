@@ -23,11 +23,17 @@
       <h3>New book</h3>
       <div class="form_content">
         <div>
-          <label for="title">title:*</label>
+          <div class="label_wrapper">
+            <label for="title">title:*</label>
+            <p id="title_error" class="error">must have a title</p>
+          </div>
           <input type="text" id="title" required>
         </div>
         <div>
-          <label for="author">author:*</label>
+          <div class="label_wrapper">
+            <label for="author">author:*</label>
+            <p id="author_error" class="error">must have an author</p>
+          </div>
           <input type="text" id="author" required>
         </div>
         <div>
