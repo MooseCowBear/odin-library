@@ -1,5 +1,3 @@
-const library = [];
-
 class Book {
   constructor(title, author, read = false) {
     this.title = title;
@@ -12,7 +10,7 @@ class Book {
   }
 }
 
-const seeds = [{title: "The Broom in the System", author: "David Foster Wallace", read: true}, 
+const library = [{title: "The Broom in the System", author: "David Foster Wallace", read: true}, 
               {title: "The Girls", author: "Emma Cline", read: true}, 
               {title: "Luster", author: "Raven Leilani", read: true}, 
               {title: "Loner", author: "Teddy Wayne", read: true},
@@ -22,22 +20,12 @@ const seeds = [{title: "The Broom in the System", author: "David Foster Wallace"
               {title: "Gold Diggers", author: "Sanjena Sathian", read: true}, 
               {title: "Convention", author: "David Lewis", read: true} ]
 
-
-seeds.forEach((item) => {
-  const book = new Book(item.title, item.author, item.read);
-  library.push(book);
-});
-
-console.log("library: ", library);
-
 const booksDiv = document.getElementById("books");
 
 for(let i = 0; i < library.length; i++) {
   const book = library[i];
   addBookToDom(book, i, booksDiv);
 }
-
-//set up with seed data done
 
 const addBookButton = document.getElementById("add");
 addBookButton.addEventListener("click", () => {
@@ -56,7 +44,7 @@ cancelButton.addEventListener("click", () => {
   authorErr.classList.remove("show");
 });
 
-//adding a new book. need to add validation!
+//adding a new book. 
 const submitBtn = document.getElementById("submit");
 submitBtn.addEventListener("click", (event) => { 
   event.preventDefault();
